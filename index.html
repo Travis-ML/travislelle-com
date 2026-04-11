@@ -1011,15 +1011,40 @@
   document.querySelectorAll('.stat-card').forEach(el => countObs.observe(el));
 
   /* ── Email signup handler ── */
-  function handleSignup() {
-    const val = document.getElementById('email-field').value.trim();
-    if (!val || !val.includes('@')) {
-      alert('Please enter a valid email address.');
+  async function handleSignup() {
+    const field = document.getElementById('email-field');
+    const btn   = document.querySelector('.email-btn');
+    const val   = field.value.trim();
+
+    if (!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+      field.style.borderColor = '#c0392b';
+      setTimeout(() => field.style.borderColor = '', 1500);
       return;
     }
-    // Replace this with your actual form submission / Mailchimp / etc.
-    alert('Thank you! We\'ll be in touch.');
-    document.getElementById('email-field').value = '';
+
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://travislelle-subscribers.travislelle.workers.dev/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: val })
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        btn.textContent = 'You\'re In!';
+        field.value = '';
+        field.placeholder = 'Thanks — we\'ll be in touch.';
+      } else {
+        btn.textContent = 'Try Again';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Try Again';
+      btn.disabled = false;
+    }
   }
 
   document.getElementById('email-field').addEventListener('keydown', e => {
