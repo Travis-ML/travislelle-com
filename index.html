@@ -666,9 +666,9 @@
     </p>
   </div>
 
-  <div class="issues-grid reveal-grid">
+  <div class="issues-grid">
 
-    <div class="issue-card">
+    <div class="issue-card reveal">
       <span class="issue-num">01</span>
       <span class="issue-icon">⚒</span>
       <div class="issue-title">Workers First</div>
@@ -678,7 +678,7 @@
       <div class="issue-stat">Union density in 1968: 33% → Today: 9.9%</div>
     </div>
 
-    <div class="issue-card">
+    <div class="issue-card reveal">
       <span class="issue-num">02</span>
       <span class="issue-icon">🏥</span>
       <div class="issue-title">Healthcare for All</div>
@@ -688,7 +688,7 @@
       <div class="issue-stat">$14,885 per capita — twice any peer nation. Ranked last on outcomes.</div>
     </div>
 
-    <div class="issue-card">
+    <div class="issue-card reveal">
       <span class="issue-num">03</span>
       <span class="issue-icon">🧒</span>
       <div class="issue-title">Universal Childcare</div>
@@ -698,7 +698,7 @@
       <div class="issue-stat">Average childcare cost: $15K–$35K/year per child</div>
     </div>
 
-    <div class="issue-card">
+    <div class="issue-card reveal">
       <span class="issue-num">04</span>
       <span class="issue-icon">🏠</span>
       <div class="issue-title">Housing You Can Afford</div>
@@ -708,7 +708,7 @@
       <div class="issue-stat">4.7M-unit housing deficit. 770,000 people homeless in 2024.</div>
     </div>
 
-    <div class="issue-card">
+    <div class="issue-card reveal">
       <span class="issue-num">05</span>
       <span class="issue-icon">📊</span>
       <div class="issue-title">Tax the Wealthy</div>
@@ -718,7 +718,7 @@
       <div class="issue-stat">1968 top rate: 91%. GDP growth: 4%/yr. Current top rate: 37%.</div>
     </div>
 
-    <div class="issue-card">
+    <div class="issue-card reveal">
       <span class="issue-num">06</span>
       <span class="issue-icon">🔍</span>
       <div class="issue-title">End the Corruption</div>
@@ -728,7 +728,7 @@
       <div class="issue-stat">Congressional approval: 15%. Trust in government: 20–25%.</div>
     </div>
 
-    <div class="issue-card">
+    <div class="issue-card reveal">
       <span class="issue-num">07</span>
       <span class="issue-icon">🎓</span>
       <div class="issue-title">Education That Works</div>
@@ -738,7 +738,7 @@
       <div class="issue-stat">$1.8 trillion student debt. 42.7 million borrowers.</div>
     </div>
 
-    <div class="issue-card">
+    <div class="issue-card reveal">
       <span class="issue-num">08</span>
       <span class="issue-icon">⚖️</span>
       <div class="issue-title">Criminal Justice Reform</div>
@@ -748,7 +748,7 @@
       <div class="issue-stat">U.S. incarceration rate: 541/100K. Norway: 54/100K.</div>
     </div>
 
-    <div class="issue-card">
+    <div class="issue-card reveal">
       <span class="issue-num">09</span>
       <span class="issue-icon">💊</span>
       <div class="issue-title">Smart Drug Policy</div>
@@ -758,7 +758,7 @@
       <div class="issue-stat">Portugal model result: overdose deaths reduced 90%+ in 15 years</div>
     </div>
 
-    <div class="issue-card">
+    <div class="issue-card reveal">
       <span class="issue-num">10</span>
       <span class="issue-icon">🌍</span>
       <div class="issue-title">Immigration That Works</div>
@@ -768,7 +768,7 @@
       <div class="issue-stat">Immigration adds $8.9T to GDP over the next decade (CBO)</div>
     </div>
 
-    <div class="issue-card">
+    <div class="issue-card reveal">
       <span class="issue-num">11</span>
       <span class="issue-icon">🥦</span>
       <div class="issue-title">Clean Food Standards</div>
@@ -778,7 +778,7 @@
       <div class="issue-stat">72 pesticides banned in the EU are legal in the U.S.</div>
     </div>
 
-    <div class="issue-card">
+    <div class="issue-card reveal">
       <span class="issue-num">12</span>
       <span class="issue-icon">🏪</span>
       <div class="issue-title">Small Business Liberation</div>
@@ -959,7 +959,7 @@
         revealObs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
 
   document.querySelectorAll('.reveal, .reveal-grid').forEach(el => revealObs.observe(el));
 
