@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travis Lelle — For the People</title>
+  <meta name="description" content="Travis Lelle for [Office] — A blueprint for American working-class prosperity. Every policy proven somewhere. The only question is whether we choose it.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy:       #07101f;
+      --navy-mid:   #0d1a30;
+      --navy-card:  #101e34;
+      --navy-light: #162440;
+      --gold:       #c8a44a;
+      --gold-light: #dfc06e;
+      --gold-dim:   rgba(200,164,74,0.12);
+      --gold-line:  rgba(200,164,74,0.25);
+      --white:      #f0ece2;
+      --offwhite:   #c8c4ba;
+      --gray:       #8a93a8;
+      --danger:     #c0392b;
+      --safe:       #27ae60;
+      --glow: 0 0 60px rgba(200,164,74,0.08);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SCROLLBAR ─────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy-mid); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+    /* ─── NAV ───────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 200;
+      padding: 1.4rem 5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(7,16,31,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--gold-line);
+      transition: padding 0.35s, background 0.35s;
+    }
+    nav.scrolled { padding: 0.9rem 5rem; background: rgba(7,16,31,0.97); }
+
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 1.25rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      text-decoration: none; color: var(--white);
+    }
+    .nav-logo em { color: var(--gold); font-style: normal; }
+
+    .nav-links { display: flex; gap: 2.8rem; list-style: none; align-items: center; }
+    .nav-links a {
+      color: var(--gray); text-decoration: none;
+      font-size: 0.78rem; letter-spacing: 0.14em;
+      text-transform: uppercase; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta-btn {
+      background: var(--gold) !important; color: var(--navy) !important;
+      padding: 0.55rem 1.5rem !important; font-weight: 800 !important;
+      clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+      transition: background 0.2s !important;
+    }
+    .nav-cta-btn:hover { background: var(--gold-light) !important; }
+
+    /* ─── HERO ──────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 10rem 5rem 6rem; position: relative; overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 70% at 70% 35%, rgba(200,164,74,0.055) 0%, transparent 60%),
+        radial-gradient(ellipse 90% 80% at 10% 80%, rgba(13,26,48,0.9) 0%, transparent 70%),
+        linear-gradient(150deg, #07101f 0%, #0a1828 55%, #07101f 100%);
+    }
+
+    /* Subtle animated dot grid */
+    .hero-dots {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: radial-gradient(circle, rgba(200,164,74,0.07) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: driftGrid 20s linear infinite;
+    }
+    @keyframes driftGrid {
+      0%   { background-position: 0 0; }
+      100% { background-position: 40px 40px; }
+    }
+
+    /* Right accent panel */
+    .hero-panel {
+      position: absolute; right: 0; top: 0; bottom: 0; width: 38%;
+      border-left: 1px solid var(--gold-line);
+      background: linear-gradient(180deg, transparent 0%, rgba(200,164,74,0.03) 40%, rgba(200,164,74,0.06) 70%, transparent 100%);
+      display: flex; flex-direction: column; justify-content: center; padding: 6rem 3rem;
+      gap: 2.5rem; z-index: 1;
+      animation: fadeIn 1.4s ease 0.8s both;
+    }
+
+    .hero-panel-stat {
+      border-bottom: 1px solid rgba(200,164,74,0.12);
+      padding-bottom: 2rem;
+    }
+    .hero-panel-stat:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .hps-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 2.6rem; color: var(--gold);
+      line-height: 1;
+    }
+    .hps-label {
+      font-size: 0.78rem; color: var(--gray);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      margin-top: 0.4rem; line-height: 1.5;
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.82rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;
+      animation: fadeInUp 0.8s ease 0.1s both;
+    }
+    .hero-eyebrow::before { content: ''; width: 36px; height: 2px; background: var(--gold); }
+
+    .hero-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(5.5rem, 11vw, 9.5rem);
+      line-height: 0.88; text-transform: uppercase;
+      letter-spacing: -0.02em;
+      animation: fadeInUp 0.8s ease 0.2s both;
+    }
+
+    .hero-office {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-style: italic;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--gold); margin-bottom: 2.5rem;
+      animation: fadeInUp 0.8s ease 0.3s both;
+    }
+
+    .hero-tagline {
+      font-family: 'Lora', serif; font-style: italic;
+      font-size: clamp(1rem, 1.6vw, 1.2rem); color: var(--offwhite);
+      line-height: 1.75; max-width: 520px; margin-bottom: 3rem;
+      animation: fadeInUp 0.8s ease 0.4s both;
+    }
+    .hero-tagline strong { font-style: normal; color: var(--white); }
+
+    .hero-btns {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease 0.5s both;
+    }
+
+    .btn-gold {
+      background: var(--gold); color: var(--navy);
+      padding: 1rem 2.6rem; font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem; font-weight: 800; letter-spacing: 0.18em;
+      text-transform: uppercase; text-decoration: none; display: inline-block;
+      clip-path: polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-outline {
+      border: 1px solid var(--gold-line); color: var(--offwhite);
+      padding: 1rem 2.6rem; font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; text-decoration: none; display: inline-block;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); background: rgba(200,164,74,0.05); }
+
+    /* ─── MARQUEE TICKER ────────────────────────────────────── */
+    .ticker {
+      background: var(--gold); padding: 0.7rem 0; overflow: hidden;
+      border-top: 1px solid rgba(0,0,0,0.2); border-bottom: 1px solid rgba(0,0,0,0.2);
+    }
+    .ticker-track {
+      display: flex; gap: 0; white-space: nowrap;
+      animation: scrollLeft 45s linear infinite;
+    }
+    .ticker-item {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 0.85rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--navy); padding: 0 2.5rem;
+      display: flex; align-items: center; gap: 2.5rem;
+    }
+    .ticker-item::after { content: '✦'; font-size: 0.6rem; color: rgba(0,0,0,0.35); }
+    @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ─── CRISIS STATS ──────────────────────────────────────── */
+    #crisis {
+      padding: 6rem 5rem;
+      background: var(--navy-mid);
+      border-bottom: 1px solid var(--gold-line);
+    }
+
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem; letter-spacing: 0.4em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(2.4rem, 5vw, 4rem);
+      text-transform: uppercase; line-height: 0.95;
+    }
+    .section-sub {
+      font-family: 'Lora', serif; color: var(--gray);
+      font-size: 1rem; margin-top: 1.2rem; font-style: italic;
+    }
+
+    .crisis-header { text-align: center; margin-bottom: 4.5rem; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--gold-line);
+      border: 1px solid var(--gold-line);
+    }
+
+    .stat-card {
+      background: var(--navy-mid); padding: 2.8rem 2rem;
+      text-align: center; position: relative; overflow: hidden;
+      transition: background 0.3s;
+    }
+    .stat-card:hover { background: var(--navy-light); }
+    .stat-card::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 0; right: 0; height: 3px;
+      background: var(--gold); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .stat-card:hover::after { transform: scaleX(1); }
+
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      color: var(--gold); line-height: 1; margin-bottom: 0.7rem;
+    }
+    .stat-lbl {
+      font-size: 0.82rem; color: var(--gray);
+      line-height: 1.5; text-transform: uppercase;
+      letter-spacing: 0.06em; max-width: 220px; margin: 0 auto;
+    }
+
+    /* ─── PLATFORM ──────────────────────────────────────────── */
+    #platform { padding: 6rem 5rem; }
+
+    .platform-intro {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: end; margin-bottom: 4.5rem;
+    }
+    .platform-intro-right {
+      font-family: 'Lora', serif; font-style: italic;
+      color: var(--gray); font-size: 1.05rem; line-height: 1.8;
+    }
+    .platform-intro-right strong { color: var(--white); font-style: normal; }
+
+    .issues-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--gold-line);
+      border: 1px solid var(--gold-line);
+    }
+
+    .issue-card {
+      background: var(--navy-card); padding: 2.4rem;
+      position: relative; overflow: hidden; transition: background 0.3s;
+    }
+    .issue-card:hover { background: var(--navy-light); }
+
+    .issue-card::before {
+      content: ''; position: absolute;
+      left: 0; top: 0; bottom: 0; width: 3px;
+      background: var(--gold); transform: scaleY(0); transform-origin: bottom;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .issue-card:hover::before { transform: scaleY(1); }
+
+    .issue-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.72rem;
+      color: rgba(200,164,74,0.35); letter-spacing: 0.25em;
+      margin-bottom: 1.2rem; display: block;
+    }
+    .issue-icon { font-size: 1.8rem; display: block; margin-bottom: 0.9rem; }
+
+    .issue-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1.35rem;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      margin-bottom: 0.9rem; color: var(--white);
+    }
+    .issue-desc {
+      font-size: 0.875rem; color: var(--gray); line-height: 1.7;
+    }
+    .issue-stat {
+      margin-top: 1.4rem; padding-top: 1.2rem;
+      border-top: 1px solid rgba(200,164,74,0.15);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem; color: var(--gold); letter-spacing: 0.04em;
+    }
+
+    /* ─── VISION / COMPARISON ───────────────────────────────── */
+    #vision {
+      background: var(--navy-mid);
+      border-top: 1px solid var(--gold-line);
+      border-bottom: 1px solid var(--gold-line);
+      padding: 6rem 5rem;
+    }
+
+    .vision-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; align-items: center; max-width: 1200px; margin: 0 auto;
+    }
+
+    .vision-pull {
+      border-left: 4px solid var(--gold); padding-left: 1.6rem;
+      margin: 2.2rem 0;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-style: italic;
+      font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+      color: var(--white); line-height: 1.3;
+    }
+    .vision-body {
+      font-family: 'Lora', serif; font-size: 1rem;
+      color: var(--gray); line-height: 1.85; margin-bottom: 1rem;
+    }
+
+    .comp-table { border: 1px solid var(--gold-line); }
+    .comp-row {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      border-bottom: 1px solid rgba(200,164,74,0.1);
+    }
+    .comp-row:last-child { border-bottom: none; }
+    .comp-cell {
+      padding: 0.85rem 1.1rem; font-size: 0.84rem;
+      border-right: 1px solid rgba(200,164,74,0.1);
+    }
+    .comp-cell:last-child { border-right: none; }
+    .comp-hdr {
+      background: var(--navy-light);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.72rem;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
+    }
+    .comp-metric { color: var(--offwhite); }
+    .comp-then { color: var(--safe); font-weight: 600; }
+    .comp-now  { color: var(--danger); font-weight: 600; }
+
+    /* ─── ABOUT ─────────────────────────────────────────────── */
+    #about { padding: 6rem 5rem; }
+
+    .about-grid {
+      display: grid; grid-template-columns: 280px 1fr;
+      gap: 5rem; align-items: start;
+    }
+
+    .about-sidebar { position: sticky; top: 7rem; }
+
+    .about-photo {
+      width: 100%; aspect-ratio: 3/4;
+      background: var(--navy-light);
+      border: 1px solid var(--gold-line);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1rem;
+      color: var(--gray); font-size: 0.75rem; text-align: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .about-photo-icon { font-size: 2.5rem; opacity: 0.3; }
+
+    .about-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 1.8rem;
+      text-transform: uppercase; margin-top: 1.2rem;
+    }
+    .about-sub {
+      color: var(--gold); font-size: 0.8rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      font-family: 'Barlow Condensed', sans-serif; margin-top: 0.3rem;
+    }
+
+    .about-body {
+      font-family: 'Lora', serif; font-size: 1.05rem;
+      color: var(--gray); line-height: 1.85; margin-bottom: 1.5rem;
+    }
+
+    .creds { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .cred {
+      display: flex; gap: 1rem; padding: 1rem 1.2rem;
+      background: var(--navy-mid); border-left: 3px solid rgba(200,164,74,0.35);
+      align-items: flex-start;
+    }
+    .cred-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .cred-text { font-size: 0.86rem; color: var(--gray); line-height: 1.55; }
+    .cred-text strong { display: block; color: var(--white); margin-bottom: 0.2rem; font-size: 0.92rem; }
+
+    /* ─── GET INVOLVED ──────────────────────────────────────── */
+    #get-involved {
+      background: var(--navy-mid);
+      border-top: 1px solid var(--gold-line);
+      padding: 7rem 5rem; text-align: center;
+    }
+    .gi-inner { max-width: 560px; margin: 0 auto; }
+    .gi-inner .section-title { font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 1rem; }
+
+    .gi-sub {
+      font-family: 'Lora', serif; color: var(--gray);
+      font-size: 1.05rem; font-style: italic; margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    .email-form { display: flex; gap: 0; max-width: 460px; margin: 0 auto 1.2rem; }
+    .email-input {
+      flex: 1; background: var(--navy); color: var(--white);
+      border: 1px solid var(--gold-line); border-right: none;
+      padding: 1rem 1.2rem; font-family: 'Barlow', sans-serif;
+      font-size: 0.95rem; outline: none;
+      transition: border-color 0.2s;
+    }
+    .email-input:focus { border-color: var(--gold); }
+    .email-input::placeholder { color: var(--gray); }
+    .email-btn {
+      background: var(--gold); color: var(--navy); border: none;
+      padding: 1rem 1.8rem; font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 0.85rem; letter-spacing: 0.18em;
+      text-transform: uppercase; cursor: pointer; transition: background 0.2s;
+    }
+    .email-btn:hover { background: var(--gold-light); }
+
+    .gi-note { font-size: 0.75rem; color: rgba(138,147,168,0.55); }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      padding: 2rem 5rem;
+      border-top: 1px solid var(--gold-line);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 1rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-legal { font-size: 0.72rem; color: var(--gray); }
+
+    /* ─── ANIMATIONS ─────────────────────────────────────────── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal-grid > * {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal-grid.visible > *:nth-child(1)  { opacity:1; transform:translateY(0); transition-delay:0s; }
+    .reveal-grid.visible > *:nth-child(2)  { opacity:1; transform:translateY(0); transition-delay:0.07s; }
+    .reveal-grid.visible > *:nth-child(3)  { opacity:1; transform:translateY(0); transition-delay:0.14s; }
+    .reveal-grid.visible > *:nth-child(4)  { opacity:1; transform:translateY(0); transition-delay:0.21s; }
+    .reveal-grid.visible > *:nth-child(5)  { opacity:1; transform:translateY(0); transition-delay:0.28s; }
+    .reveal-grid.visible > *:nth-child(6)  { opacity:1; transform:translateY(0); transition-delay:0.35s; }
+    .reveal-grid.visible > *:nth-child(7)  { opacity:1; transform:translateY(0); transition-delay:0.42s; }
+    .reveal-grid.visible > *:nth-child(8)  { opacity:1; transform:translateY(0); transition-delay:0.49s; }
+    .reveal-grid.visible > *:nth-child(9)  { opacity:1; transform:translateY(0); transition-delay:0.56s; }
+    .reveal-grid.visible > *:nth-child(10) { opacity:1; transform:translateY(0); transition-delay:0.63s; }
+    .reveal-grid.visible > *:nth-child(11) { opacity:1; transform:translateY(0); transition-delay:0.70s; }
+    .reveal-grid.visible > *:nth-child(12) { opacity:1; transform:translateY(0); transition-delay:0.77s; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .issues-grid { grid-template-columns: repeat(2,1fr); }
+      .hero-panel { display: none; }
+      #hero { padding: 10rem 3rem 6rem; }
+    }
+    @media (max-width: 900px) {
+      nav { padding: 1rem 2rem; }
+      nav.scrolled { padding: 0.7rem 2rem; }
+      .nav-links { display: none; }
+      #crisis,#platform,#vision,#about,#get-involved { padding: 4rem 2rem; }
+      footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.8rem; text-align: center; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .issues-grid { grid-template-columns: 1fr; }
+      .vision-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-sidebar { position: static; }
+      .platform-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+      .comp-row { grid-template-columns: 1fr 1fr 1fr; }
+      .email-form { flex-direction: column; }
+      .email-input { border-right: 1px solid var(--gold-line); border-bottom: none; }
+    }
+    @media (max-width: 560px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .hero-name { font-size: 4.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────────────────────── -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">Travis <em>Lelle</em></a>
+  <ul class="nav-links">
+    <li><a href="#crisis">The Crisis</a></li>
+    <li><a href="#platform">Platform</a></li>
+    <li><a href="#vision">By the Numbers</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#get-involved" class="nav-cta-btn">Get Involved</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Central Florida · Independent</div>
+    <h1 class="hero-name">Travis<br>Lelle</h1>
+    <div class="hero-office">For [Office]</div>
+    <p class="hero-tagline">
+      <strong>For the people. Not the powerful.</strong><br>
+      Every policy on this platform has been proven somewhere — most of them right here in the United States. This isn't speculation. It's a choice.
+    </p>
+    <div class="hero-btns">
+      <a href="#platform" class="btn-gold">See the Platform</a>
+      <a href="#vision" class="btn-outline">The Numbers</a>
+    </div>
+  </div>
+
+  <!-- Right-side stat panel — desktop only -->
+  <div class="hero-panel">
+    <div class="hero-panel-stat">
+      <div class="hps-num">281:1</div>
+      <div class="hps-label">CEO-to-worker pay ratio today. In 1965 it was 21:1.</div>
+    </div>
+    <div class="hero-panel-stat">
+      <div class="hps-num">$7.25</div>
+      <div class="hps-label">Federal minimum wage — unchanged since 2009. Worth 51% less than 1968.</div>
+    </div>
+    <div class="hero-panel-stat">
+      <div class="hps-num">$5B</div>
+      <div class="hps-label">Spent annually on lobbying. Your representative represents someone. Who?</div>
+    </div>
+    <div class="hero-panel-stat">
+      <div class="hps-num">91%</div>
+      <div class="hps-label">Top marginal tax rate during America's strongest GDP growth (1945–1973).</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TICKER ─────────────────────────────────────────────────────────── -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="ticker-track">
+    <div class="ticker-item">Workers First</div>
+    <div class="ticker-item">Universal Healthcare</div>
+    <div class="ticker-item">Affordable Childcare</div>
+    <div class="ticker-item">Housing for All</div>
+    <div class="ticker-item">Progressive Taxation</div>
+    <div class="ticker-item">End Corruption</div>
+    <div class="ticker-item">Education Reform</div>
+    <div class="ticker-item">Criminal Justice</div>
+    <div class="ticker-item">Smart Drug Policy</div>
+    <div class="ticker-item">Immigration Reform</div>
+    <div class="ticker-item">Clean Food</div>
+    <div class="ticker-item">Small Business</div>
+    <!-- Duplicate for seamless loop -->
+    <div class="ticker-item">Workers First</div>
+    <div class="ticker-item">Universal Healthcare</div>
+    <div class="ticker-item">Affordable Childcare</div>
+    <div class="ticker-item">Housing for All</div>
+    <div class="ticker-item">Progressive Taxation</div>
+    <div class="ticker-item">End Corruption</div>
+    <div class="ticker-item">Education Reform</div>
+    <div class="ticker-item">Criminal Justice</div>
+    <div class="ticker-item">Smart Drug Policy</div>
+    <div class="ticker-item">Immigration Reform</div>
+    <div class="ticker-item">Clean Food</div>
+    <div class="ticker-item">Small Business</div>
+  </div>
+</div>
+
+<!-- ── CRISIS STATS ───────────────────────────────────────────────────── -->
+<section id="crisis">
+  <div class="crisis-header reveal">
+    <div class="section-label">The Numbers Don't Lie</div>
+    <h2 class="section-title">This Is What Deliberate<br>Policy Failure Looks Like</h2>
+    <p class="section-sub">These aren't market forces. They're choices — and choices can be reversed.</p>
+  </div>
+
+  <div class="stats-grid reveal-grid">
+    <div class="stat-card">
+      <div class="stat-num" data-count="30.8" data-suffix="%">—</div>
+      <div class="stat-lbl">Of all U.S. wealth held by the top 1%.<br>The bottom 50% holds 2.5%.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" data-count="1094" data-suffix="%" data-int="true">—</div>
+      <div class="stat-lbl">CEO pay increase since 1978.<br>Typical worker pay: 26%.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" data-count="530" data-suffix="K" data-int="true">—</div>
+      <div class="stat-lbl">Families file medical bankruptcy<br>every year in the richest nation on earth.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" data-prefix="$" data-count="427844" data-suffix="" data-int="true" data-money="true">—</div>
+      <div class="stat-lbl">Median home price. You need $126,700<br>to afford it. Median income: $80,000.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" data-static="$7.25">$7.25</div>
+      <div class="stat-lbl">Federal minimum wage — not raised<br>since 2009. Purchasing power: -51% since 1968.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" data-prefix="$" data-count="5" data-suffix="B" data-int="true">—</div>
+      <div class="stat-lbl">Spent annually on lobbying. Dark money<br>in 2024 elections alone: $1.4B.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PLATFORM ───────────────────────────────────────────────────────── -->
+<section id="platform">
+  <div class="platform-intro reveal">
+    <div>
+      <div class="section-label">The Platform</div>
+      <h2 class="section-title">12 Pillars.<br>Zero Speculation.</h2>
+    </div>
+    <p class="platform-intro-right">
+      <strong>Everything here has been done before</strong> — by the United States itself, or by a peer nation that has published the results. Norway's prisons. Portugal's drug policy. Vienna's housing. Singapore's anti-corruption courts. Japan's zoning. Germany's vocational schools. This is not a wish list. It is a blueprint drawn from proof.
+    </p>
+  </div>
+
+  <div class="issues-grid reveal-grid">
+
+    <div class="issue-card">
+      <span class="issue-num">01</span>
+      <span class="issue-icon">⚒</span>
+      <div class="issue-title">Workers First</div>
+      <div class="issue-desc">
+        Pass a modernized labor law with real penalties for union-busting, sectoral bargaining, and card-check recognition. Raise the federal minimum wage to $17/hour — indexed to median wage growth so it never erodes again. Mandate that companies over 2,000 employees put workers on their boards. Union density explains roughly 25% of the Gini decline between 1936 and 1968. When it collapsed, wages decoupled from productivity and never recovered.
+      </div>
+      <div class="issue-stat">Union density in 1968: 33% → Today: 9.9%</div>
+    </div>
+
+    <div class="issue-card">
+      <span class="issue-num">02</span>
+      <span class="issue-icon">🏥</span>
+      <div class="issue-title">Healthcare for All</div>
+      <div class="issue-desc">
+        The U.S. spends nearly double any peer nation on healthcare and ranks last on outcomes. A review of 22 single-payer studies found 19 concluded it would cost less than the current system. Transition to Medicare for All through phased expansion — lowering eligibility by 10 years annually — while negotiating drug prices through international reference pricing. End medical bankruptcy. End job lock. End the 18% premium penalty small businesses pay relative to large corporations.
+      </div>
+      <div class="issue-stat">$14,885 per capita — twice any peer nation. Ranked last on outcomes.</div>
+    </div>
+
+    <div class="issue-card">
+      <span class="issue-num">03</span>
+      <span class="issue-icon">🧒</span>
+      <div class="issue-title">Universal Childcare</div>
+      <div class="issue-desc">
+        Two incomes are no longer a lifestyle choice — they are a survival requirement. Yet childcare costs $15,000–$35,000 per year per child, consuming up to 40% of a working family's take-home pay. The solution is restructuring childcare as a not-for-profit public sector with federal and state subsidies capping family costs at roughly 7% of income — near zero for lower-income parents. Workers who dedicate their careers to raising the next generation deserve professional pay. This is an investment in every child's development and every parent's ability to stay in the workforce.
+      </div>
+      <div class="issue-stat">Average childcare cost: $15K–$35K/year per child</div>
+    </div>
+
+    <div class="issue-card">
+      <span class="issue-num">04</span>
+      <span class="issue-icon">🏠</span>
+      <div class="issue-title">Housing You Can Afford</div>
+      <div class="issue-desc">
+        Minneapolis eliminated single-family-only zoning in 2018 — housing stock grew 12% while rents rose just 1%. Tokyo's national zoning makes a downtown one-bedroom $500/month. Vienna covers 60% of its population in social housing at €300–750/month with only 18% of residents rent-burdened versus 57–58% in Los Angeles. A federal zoning floor, a $20–30B annual social housing investment, land value taxation, and a mandate to build 10+ million homes over a decade can restore a 3:1 price-to-income ratio.
+      </div>
+      <div class="issue-stat">4.7M-unit housing deficit. 770,000 people homeless in 2024.</div>
+    </div>
+
+    <div class="issue-card">
+      <span class="issue-num">05</span>
+      <span class="issue-icon">📊</span>
+      <div class="issue-title">Tax the Wealthy</div>
+      <div class="issue-desc">
+        The post-war Golden Age — 4% GDP growth, rising wages, expanding homeownership — ran on a 91% top marginal tax rate and 52% corporate rate. Today's 37% and 21% are a historical anomaly engineered by concentrated wealth. Restore progressive taxation: 50–60% on income above $1M, capital gains taxed as ordinary income, the carried interest loophole closed, a 2–3% wealth tax above $50M, and the step-up basis loophole eliminated. Revenue potential: $4–7 trillion per decade to fund universal programs while reducing the deficit.
+      </div>
+      <div class="issue-stat">1968 top rate: 91%. GDP growth: 4%/yr. Current top rate: 37%.</div>
+    </div>
+
+    <div class="issue-card">
+      <span class="issue-num">06</span>
+      <span class="issue-icon">🔍</span>
+      <div class="issue-title">End the Corruption</div>
+      <div class="issue-desc">
+        $5 billion in annual lobbying and $1.4 billion in dark money is not democracy — it is regulatory capture. Create an independent U.S. Anti-Corruption Bureau modeled on Singapore's CPIB, which achieves a 98–99% conviction rate and has prosecuted sitting Cabinet ministers. Lifetime lobbying ban for former members of Congress. Ban congressional stock trading. Full DISCLOSE Act transparency. Public campaign financing with 6:1 small-dollar matching. Corruption is not a side issue — it is the mechanism through which every other policy failure is maintained.
+      </div>
+      <div class="issue-stat">Congressional approval: 15%. Trust in government: 20–25%.</div>
+    </div>
+
+    <div class="issue-card">
+      <span class="issue-num">07</span>
+      <span class="issue-icon">🎓</span>
+      <div class="issue-title">Education That Works</div>
+      <div class="issue-desc">
+        The U.S. spends more per student than almost any peer nation and ranks 34th in math. The problem is inequality and design, not investment. Universal pre-K with a 3:1 to 9:1 benefit-cost ratio. Federal funding equalization to break the property-tax-to-school-quality cycle. Teacher professionalization modeled on Finland — top 15–20% of applicants, Master's degrees, full professional autonomy. A German-style dual vocational system for the majority of students who don't need a four-year degree. Tuition-free community college. Income-contingent repayment for remaining student debt.
+      </div>
+      <div class="issue-stat">$1.8 trillion student debt. 42.7 million borrowers.</div>
+    </div>
+
+    <div class="issue-card">
+      <span class="issue-num">08</span>
+      <span class="issue-icon">⚖️</span>
+      <div class="issue-title">Criminal Justice Reform</div>
+      <div class="issue-desc">
+        1.9 million people in American cages — 5 to 10 times the rate of any European democracy. Eliminate mandatory minimums. End cash bail — New Jersey's elimination cut pretrial detention 50% with no increase in crime. Abolish private prisons whose bed-occupancy contracts directly incentivize mass incarceration. Transform remaining facilities into rehabilitation centers modeled on Norway, which cut recidivism from 60–70% to 18–25%. If Black Americans were incarcerated at the same rate as white Americans, prison populations would drop 40%. That number speaks for itself.
+      </div>
+      <div class="issue-stat">U.S. incarceration rate: 541/100K. Norway: 54/100K.</div>
+    </div>
+
+    <div class="issue-card">
+      <span class="issue-num">09</span>
+      <span class="issue-icon">💊</span>
+      <div class="issue-title">Smart Drug Policy</div>
+      <div class="issue-desc">
+        The War on Drugs has cost over $1 trillion since 1971, produces 100,000+ overdose deaths per year, and incarcerates people of color at rates wildly disproportionate to actual drug use. Portugal decriminalized all drugs in 2001 — overdose deaths fell from 369 to 30 within 15 years, HIV infections among drug users dropped over 90%. Oregon's failure shows what not to do: treatment infrastructure must come first. Redirect the $25.7 billion currently spent on drug criminalization toward treatment-on-demand and supervised consumption sites.
+      </div>
+      <div class="issue-stat">Portugal model result: overdose deaths reduced 90%+ in 15 years</div>
+    </div>
+
+    <div class="issue-card">
+      <span class="issue-num">10</span>
+      <span class="issue-icon">🌍</span>
+      <div class="issue-title">Immigration That Works</div>
+      <div class="issue-desc">
+        Immigrants account for 17% of U.S. GDP and $525 billion in annual taxes. The CBO projects recent immigration adds $8.9 trillion to GDP over the next decade. Yet 7+ million applications are pending and Indian employment-based applicants wait decades due to absurd per-country caps. Eliminate per-country caps. Adopt a hybrid points-based system modeled on Canada, which processes permanent residency in 6 months. Create a pathway for the 2.5 million Dreamers contributing $65 billion annually. Build a system that reflects our actual interests.
+      </div>
+      <div class="issue-stat">Immigration adds $8.9T to GDP over the next decade (CBO)</div>
+    </div>
+
+    <div class="issue-card">
+      <span class="issue-num">11</span>
+      <span class="issue-icon">🥦</span>
+      <div class="issue-title">Clean Food Standards</div>
+      <div class="issue-desc">
+        The FDA's GRAS loophole allows manufacturers to self-certify additive safety — 99% of chemicals introduced since 2000 were approved by industry, not the government. The U.S. permits 72 pesticides the EU has banned, and allows food additives that Europe banned years ago. Farm subsidies of $16 billion annually flow almost entirely to commodity crops, not fruits and vegetables, artificially cheapening processed food. Close the GRAS loophole. Redirect subsidies. Adopt the EU's precautionary principle: prove it's safe before it goes in the food supply.
+      </div>
+      <div class="issue-stat">72 pesticides banned in the EU are legal in the U.S.</div>
+    </div>
+
+    <div class="issue-card">
+      <span class="issue-num">12</span>
+      <span class="issue-icon">🏪</span>
+      <div class="issue-title">Small Business Liberation</div>
+      <div class="issue-desc">
+        Universal healthcare alone transforms entrepreneurship by eliminating the 18% cost penalty small businesses pay for equivalent coverage and ending the job lock that keeps workers in positions they'd leave if they could. Real antitrust enforcement that breaks monopolies crowding out competition. Public banking modeled on the Bank of North Dakota — 20% average annual profit over 21 years while expanding affordable lending. A genuinely level playing field is not anti-market. It's what a market looks like before it's been captured.
+      </div>
+      <div class="issue-stat">Small businesses pay 18% more per worker for equivalent coverage</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── VISION / COMPARISON ────────────────────────────────────────────── -->
+<section id="vision">
+  <div class="vision-grid">
+    <div class="reveal">
+      <div class="section-label">Then vs. Now</div>
+      <h2 class="section-title">We Built This Once.<br>We Can Build It Again.</h2>
+
+      <div class="vision-pull">
+        "Under top marginal tax rates of 91%, the U.S. economy grew at 4% annually for three decades and built the largest middle class in history."
+      </div>
+
+      <p class="vision-body">
+        The post-WWII American economy was not an accident. It was the product of deliberate policy: strong unions, progressive taxation, public investment, and financial regulation. The metrics below are not nostalgia — they are a proof of concept.
+      </p>
+      <p class="vision-body">
+        The gap between then and now is the direct result of deliberate policy choices made between 1980 and 2025. It can be reversed through equally deliberate choices. The only question is whether we choose to make them.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <div class="comp-table">
+        <div class="comp-row">
+          <div class="comp-cell comp-hdr">Metric</div>
+          <div class="comp-cell comp-hdr">Then (1945–1973)</div>
+          <div class="comp-cell comp-hdr">Now (2025)</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-cell comp-metric">Gini Coefficient</div>
+          <div class="comp-cell comp-then">0.394</div>
+          <div class="comp-cell comp-now">0.485</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-cell comp-metric">Home Price / Income Ratio</div>
+          <div class="comp-cell comp-then">2:1</div>
+          <div class="comp-cell comp-now">5:1</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-cell comp-metric">Union Density</div>
+          <div class="comp-cell comp-then">33%</div>
+          <div class="comp-cell comp-now">9.9%</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-cell comp-metric">Annual GDP Growth</div>
+          <div class="comp-cell comp-then">~4%</div>
+          <div class="comp-cell comp-now">~2.5%</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-cell comp-metric">Top Marginal Tax Rate</div>
+          <div class="comp-cell comp-then">91%</div>
+          <div class="comp-cell comp-now">37%</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-cell comp-metric">Corporate Tax Rate</div>
+          <div class="comp-cell comp-then">52%</div>
+          <div class="comp-cell comp-now">21%</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-cell comp-metric">CEO-to-Worker Pay Ratio</div>
+          <div class="comp-cell comp-then">~21:1</div>
+          <div class="comp-cell comp-now">281:1</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-cell comp-metric">Healthcare (% of GDP)</div>
+          <div class="comp-cell comp-then">~5%</div>
+          <div class="comp-cell comp-now">18%</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-cell comp-metric">Public College Tuition/yr</div>
+          <div class="comp-cell comp-then">~$929</div>
+          <div class="comp-cell comp-now">~$11,260</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ──────────────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-sidebar reveal">
+      <div class="about-photo">
+        <span class="about-photo-icon">⊕</span>
+        Add your photo here
+      </div>
+      <div class="about-name">Travis Lelle</div>
+      <div class="about-sub">Central Florida</div>
+    </div>
+
+    <div class="reveal">
+      <div class="section-label">About Travis</div>
+      <h2 class="section-title" style="font-size:clamp(2rem,4vw,3.2rem);margin-bottom:2rem;">Built From the<br>Ground Up.</h2>
+
+      <p class="about-body">
+        Travis Lelle is a Central Florida resident, cybersecurity professional, and lifelong problem-solver who has spent his career building systems that protect people — from enterprise security infrastructure to emergency communications networks supporting first responders across the region.
+      </p>
+      <p class="about-body">
+        He has seen from inside the technology industry how concentrated corporate power distorts markets, suppresses wages, and captures regulators. He has seen from his community what happens when the systems that are supposed to protect working families — healthcare, housing, childcare, criminal justice — are allowed to fail them instead.
+      </p>
+      <p class="about-body">
+        His background in security engineering is not incidental to his politics: he understands that broken systems have root causes, and that patching symptoms without addressing the underlying vulnerability solves nothing. Travis believes the United States is not a country that has run out of solutions. It is a country whose political system has been bought and paid for by people who profit from keeping those solutions off the table.
+      </p>
+
+      <div class="creds">
+        <div class="cred">
+          <span class="cred-icon">🔒</span>
+          <div class="cred-text">
+            <strong>Principal Security Engineer</strong>
+            Over a decade in enterprise cybersecurity, AI/ML security research, and detection engineering. Founding engineer at Deepwatch.
+          </div>
+        </div>
+        <div class="cred">
+          <span class="cred-icon">📡</span>
+          <div class="cred-text">
+            <strong>Emergency Communications Operator</strong>
+            Licensed Amateur Radio operator running Meshtastic mesh networks supporting Central Florida emergency infrastructure.
+          </div>
+        </div>
+        <div class="cred">
+          <span class="cred-icon">🌴</span>
+          <div class="cred-text">
+            <strong>Central Florida, Born and Built</strong>
+            Rooted in the community he's fighting for. Not parachuted in for an election.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GET INVOLVED ───────────────────────────────────────────────────── -->
+<section id="get-involved">
+  <div class="gi-inner reveal">
+    <div class="section-label">Get Involved</div>
+    <h2 class="section-title">This Doesn't Work<br>Without You.</h2>
+    <p class="gi-sub">
+      Every movement that changed this country started with people who decided that the status quo was a choice, not a law of nature. Be one of those people.
+    </p>
+    <div class="email-form">
+      <input type="email" class="email-input" placeholder="Your email address" id="email-field">
+      <button class="email-btn" onclick="handleSignup()">Join Us</button>
+    </div>
+    <p class="gi-note">No spam. No dark money. No nonsense.</p>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-logo">Travis <span>Lelle</span> for [Office]</div>
+  <div class="footer-legal">
+    Paid for by Travis Lelle for [Office] · travislelle.com · Central Florida
+  </div>
+</footer>
+
+<!-- ── SCRIPTS ────────────────────────────────────────────────────────── -->
+<script>
+  /* ── NAV scroll behavior ── */
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── Intersection Observer for reveal animations ── */
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-grid').forEach(el => revealObs.observe(el));
+
+  /* ── Counter animation ── */
+  function animateCount(el) {
+    if (el.dataset.animated) return;
+    el.dataset.animated = '1';
+
+    if (el.dataset.static) return; // already displayed
+
+    const raw    = parseFloat(el.dataset.count);
+    const prefix = el.dataset.prefix  || '';
+    const suffix = el.dataset.suffix  || '';
+    const isInt  = el.dataset.int     === 'true';
+    const isMon  = el.dataset.money   === 'true';
+    const dur    = 1800;
+    const start  = performance.now();
+
+    function fmt(n) {
+      if (isMon)  return prefix + '$' + Math.round(n).toLocaleString() + suffix;
+      if (isInt)  return prefix + Math.round(n).toLocaleString() + suffix;
+      return prefix + n.toFixed(1) + suffix;
+    }
+
+    function tick(now) {
+      const p  = Math.min((now - start) / dur, 1);
+      const e  = 1 - Math.pow(1 - p, 3); // ease-out-cubic
+      el.textContent = fmt(raw * e);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* Trigger counters when stat cards enter view */
+  const countObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const counter = e.target.querySelector('[data-count]');
+        if (counter) animateCount(counter);
+        countObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll('.stat-card').forEach(el => countObs.observe(el));
+
+  /* ── Email signup handler ── */
+  function handleSignup() {
+    const val = document.getElementById('email-field').value.trim();
+    if (!val || !val.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+    // Replace this with your actual form submission / Mailchimp / etc.
+    alert('Thank you! We\'ll be in touch.');
+    document.getElementById('email-field').value = '';
+  }
+
+  document.getElementById('email-field').addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleSignup();
+  });
+</script>
+
+</body>
+</html>
