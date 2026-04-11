@@ -384,15 +384,18 @@
 
     .about-photo {
       width: 100%; aspect-ratio: 3/4;
-      background: var(--navy-light);
       border: 1px solid var(--gold-line);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 1rem;
-      color: var(--gray); font-size: 0.75rem; text-align: center;
-      font-family: 'Barlow Condensed', sans-serif;
-      letter-spacing: 0.12em; text-transform: uppercase;
+      overflow: hidden;
+      display: block;
     }
-    .about-photo-icon { font-size: 2.5rem; opacity: 0.3; }
+    .about-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block;
+      filter: grayscale(15%);
+      transition: filter 0.4s ease;
+    }
+    .about-photo img:hover { filter: grayscale(0%); }
 
     .about-name {
       font-family: 'Barlow Condensed', sans-serif;
@@ -869,8 +872,7 @@
   <div class="about-grid">
     <div class="about-sidebar reveal">
       <div class="about-photo">
-        <span class="about-photo-icon">⊕</span>
-        Add your photo here
+        <img src="./photo.jpg" alt="Travis Lelle">
       </div>
       <div class="about-name">Travis Lelle</div>
       <div class="about-sub">Central Florida</div>
